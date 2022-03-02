@@ -1,0 +1,547 @@
+:root {
+  --color-white: hsl(0, 0%, 100%);
+  --color-black: hsl(0, 0%, 0%);
+  --color-dark-gray: hsl(0, 0%, 55%);
+  --color-very-dark-gray: hsl(0, 0%, 41%);
+}
+
+/* Thank to Josh Comeau's custom CSS Reset
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/*
+  2. Remove default margin
+*/
+* {
+  margin: 0;
+  padding: 0;
+}
+/*
+  3. Allow percentage-based heights in the application
+*/
+html,
+body {
+  height: 100%;
+}
+/*
+  Typographic tweaks!
+  4. Add accessible line-height
+  5. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+/*
+  6. Improve media defaults
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+  7. Remove built-in form typography styles
+*/
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+/*
+  8. Avoid text overflows
+*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+/*
+  9. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+
+/* Project general styles */
+body {
+  font-family: "Alata", sans-serif;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+h1 {
+  font-size: clamp(2rem, calc(1.5rem + 3vw), 4rem);
+}
+
+h2 {
+  font-size: clamp(1.8rem, calc(1.5rem + 1.5vw), 2.7rem);
+}
+
+h3 {
+  font-size: clamp(1.2rem, calc(0.8rem + 2vw), 2rem);
+}
+
+p {
+  font-size: clamp(0.9rem, calc(0.7rem + 1vw), 1.06rem);
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Class based styles */
+.page > * + * {
+  margin-top: 6em;
+}
+
+@media (min-width: 768px) {
+  .page > * + * {
+    margin-top: 8em;
+  }
+}
+
+@media (min-width: 1200px) {
+  .page > * + * {
+    margin-top: 10em;
+  }
+}
+
+.page-width {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1.5em;
+  transition: all 0.3s;
+}
+
+@media (min-width: 1200px) {
+  .page-width {
+    padding: 0 10em;
+  }
+}
+
+.header,
+.main,
+.footer {
+  width: 100%;
+}
+
+.header {
+  background-image: url(./images/mobile/image-hero.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding-top: 3em;
+}
+
+@media (min-width: 768px) {
+  .header {
+    /* Make the background a little bit darker */
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.5)), url(./images/desktop/image-hero.jpg);
+  }
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-container .logo {
+  position: relative;
+  z-index: 2;
+}
+
+.top-nav {
+  background-color: var(--color-black);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  transform: translateX(-100%);
+  padding: 16em 1.5em 0 1.5em;
+  transition: transform 0.3s ease-out;
+}
+
+.show-nav {
+  transform: translate(0);
+}
+
+@media (min-width: 768px) {
+  .top-nav {
+    position: static;
+    background-color: transparent;
+    padding: 0;
+    height: auto;
+    width: auto;
+    transform: translate(0);
+  }
+}
+
+.top-nav__links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+@media (min-width: 768px) {
+  .top-nav__links-list {
+    flex-direction: row;
+  }
+}
+
+.top-nav__link {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  color: var(--color-white);
+  display: inline-block;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s;
+}
+
+@media (min-width: 768px) {
+  .top-nav__link {
+    font-family: "Alata", sans-serif;
+    text-transform: capitalize;
+    font-size: 1rem;
+  }
+}
+
+.top-nav__link:hover {
+  border-bottom: 1px solid #eee;
+}
+
+@media (min-width: 768px) {
+  .top-nav {
+    display: block;
+  }
+
+  .top-nav__link {
+    font-size: 1rem;
+    padding: 0.5em 0;
+  }
+}
+
+.toggle-menu {
+  background-color: transparent;
+  border: none;
+  color: var(--color-white);
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+@media (min-width: 768px) {
+  .toggle-menu {
+    display: none;
+  }
+}
+
+.open-icon,
+.close-icon {
+  display: none;
+}
+
+.open-icon.active,
+.close-icon.active {
+  display: block;
+}
+
+.hero {
+  padding: 12em 0;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding: 10em 0;
+  }
+}
+
+.hero > h1 {
+  color: var(--color-white);
+  text-transform: uppercase;
+  border: 2px solid var(--color-white);
+  padding: 0.75em;
+  max-width: 14ch;
+}
+
+.intro__image {
+  width: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .intro__image {
+    width: auto;
+  }
+}
+
+.intro__text {
+  text-align: center;
+  padding: 4em 1em 0 1em;
+}
+
+@media (min-width: 768px) {
+  .intro {
+    position: relative;
+  }
+
+  .intro__text {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: var(--color-white);
+    max-width: 50%;
+    padding: 3em 0 0 3em;
+    text-align: left;
+  }
+}
+
+@media (min-width: 900px) {
+  .intro__text {
+    padding: 4em 0 0 4em;
+  }
+}
+
+.intro__text p {
+  margin-top: 1.5em;
+  color: var(--color-dark-gray);
+}
+
+.creations {
+  text-align: center;
+  padding-top: 4em;
+}
+
+@media (min-width: 768px) {
+  .creations {
+    position: relative;
+    margin-top: 3em;
+  }
+}
+
+.creations > * + * {
+  margin-top: 3em;
+}
+
+@media (min-width: 768px) {
+  .creations h2 {
+    text-align: left;
+  }
+}
+
+.creations__list {
+  width: 100%;
+  padding: 0;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1.5em;
+}
+
+.creation {
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  /* 1.5em flex gap,making 3 equal columns */
+  .creation {
+    width: calc((100% - 1.5em) / 2);
+  }
+}
+
+@media (min-width: 1200px) {
+  /* 1.5em flex gap, making 4 equal columns */
+  .creation {
+    width: calc((100% - 1.5em * 3) / 4);
+  }
+}
+
+.creation__image {
+  position: relative;
+}
+
+.creation__image img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.creation__title {
+  color: var(--color-white);
+  text-transform: uppercase;
+  text-align: left;
+  max-width: 9ch;
+  position: absolute;
+  bottom: 1em;
+  left: 1em;
+  transform: translateY(5px);
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.5em 2em;
+  border: 2px solid var(--color-black);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: var(--color-black);
+  transition: all 0.3s;
+}
+
+@media (min-width: 768px) {
+  .creations .btn {
+    position: absolute;
+    top: 0.5em;
+    right: 0;
+  }
+}
+
+.btn:hover {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.footer {
+  background-color: var(--color-black);
+  text-align: center;
+  padding: 3em 0;
+  color: var(--color-white);
+}
+
+.footer > .wrapper > * + * {
+  margin-top: 2em;
+}
+
+.footer-inside-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-top,
+.flex-bottom {
+  width: 100%;
+}
+
+.flex-bottom {
+  margin-top: 2em;
+}
+
+@media (min-width: 768px) {
+  .footer-inside-flex {
+    justify-content: space-between;
+  }
+
+  .flex-top {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .flex-bottom {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 0;
+  }
+}
+
+.footer .logo {
+  display: flex;
+  justify-content: center;
+}
+
+.footer-nav__links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  margin-top: 1.5em;
+}
+
+@media (min-width: 768px) {
+  .footer-nav__links-list {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.footer-nav__link {
+  color: var(--color-white);
+  padding: 0.5em 0;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s;
+}
+
+@media (min-width: 768px) {
+  .footer-nav__link {
+    font-size: 1rem;
+  }
+}
+
+.footer-nav__link:hover {
+  border-bottom-color: var(--color-white);
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  margin-bottom: 1em;
+}
+
+.socials a {
+  font-size: 1.5rem;
+  color: var(--color-white);
+  padding: 0.25em 0;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s;
+}
+
+.socials a:hover {
+  border-bottom-color: var(--color-white);
+}
+
+.copyright {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.copyright > small {
+  color: var(--color-dark-gray);
+  font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+  .copyright {
+    margin: 0;
+  }
+}
